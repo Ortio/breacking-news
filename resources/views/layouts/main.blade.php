@@ -14,7 +14,7 @@
     <div id="main">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="/">NewsTime</a>
+                <a class="navbar-brand" href="/">Breaking News</a>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
