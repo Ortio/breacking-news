@@ -68,7 +68,6 @@ class ParseRBC extends Command
         return 0;
     }
 
-
     /**
      * @param string $url
      * @param string $selector
@@ -85,7 +84,7 @@ class ParseRBC extends Command
         return $links;
     }
 
-    function getNews($link){
+    private function getNews($link){
         $dom = $this->getDoomFromLink($link);
 
         if (empty($dom))
@@ -117,7 +116,7 @@ class ParseRBC extends Command
      * @param string $link
      * @return HtmlDomParser|null
      */
-    function getDoomFromLink($link){
+    private function getDoomFromLink($link){
         try{
             $body = Http::get($link)->body();
             $html = HtmlDomParser::str_get_html($body);
