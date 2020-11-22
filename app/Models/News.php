@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     use HasFactory;
+    protected $guarded  = ['id'];
+    protected $dates    = ['news_time'];
+
+
 }

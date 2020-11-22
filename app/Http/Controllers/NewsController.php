@@ -15,20 +15,19 @@ class NewsController extends Controller
     public function index()
     {
         $data = News::select('id', 'title', 'text')->get();
-        $title = 'Все новости';
-        return view('news', compact('data', 'title'));
+        return view('news', compact('data'));
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * $id -
+     * @param  News  $news
      */
-    public function show($id)
+    public function show(News $news)
     {
-        $news = News::find($id);
-        return view('', compact('news'));
+        //просто чтобы не городить переменные на вывод
+        $data = $news;
+        return view('article', compact('data'));
     }
 
 
