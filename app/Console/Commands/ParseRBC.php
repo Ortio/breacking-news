@@ -37,15 +37,15 @@ class ParseRBC extends Command
      */
     public function handle()
     {
+        $progressBar = $this->output->createProgressBar($this->newsCount);
+        $progressBar->start();
+
         $links = $this->getLinks($this->site, ".js-main-reload-item");
         //в условии сказано о 15 новостях, поэтому на всякий случай срезаю массив до нужного количества
         $links = array_slice($links, 0, $this->newsCount);
 
         $news = News::pluck('url');
         $data = [];
-
-        $progressBar = $this->output->createProgressBar($this->newsCount);
-        $progressBar->start();
 
         foreach ($links as $link) {
             $n = $this->getNews($link);
@@ -73,7 +73,8 @@ class ParseRBC extends Command
      * @param string $selector
      * @return array
      */
-    private function getLinks($url, $selector){
+    private function getLinks($url, $selector)
+    {
         $dom = $this->getDoomFromLink($url);
         $links = [];
         foreach ($dom->findMulti($selector) as $el){
@@ -84,7 +85,12 @@ class ParseRBC extends Command
         return $links;
     }
 
-    private function getNews($link){
+    /**
+     * @param $link
+     * @return array|null
+     */
+    private function getNews($link)
+    {
         $dom = $this->getDoomFromLink($link);
 
         if (empty($dom))
@@ -116,7 +122,8 @@ class ParseRBC extends Command
      * @param string $link
      * @return HtmlDomParser|null
      */
-    private function getDoomFromLink($link){
+    private function getDoomFromLink($link)
+    {
         try{
             $body = Http::get($link)->body();
             $html = HtmlDomParser::str_get_html($body);
